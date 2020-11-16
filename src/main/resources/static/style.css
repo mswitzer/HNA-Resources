@@ -2,8 +2,16 @@
 height: 200px;
 width: 200px;
 object-fit: cover;
-
 }
+
+.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
 .button{
 background-color: #ADD8E6;
 border: none;
@@ -19,12 +27,14 @@ cursor: pointer;
 }
 .flex-container {
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   justify-content: space-around;
+  height: 200 px;
   align-items: center;
   align-content: space-between;
 }
 
 .head{
-text-align: center;
+    text-align: center;
+    font: 60 px Arial, sans-serif;
 }
