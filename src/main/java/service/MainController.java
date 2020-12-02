@@ -13,14 +13,6 @@ public class MainController {
 		model.addAttribute("subject", name);
 		return "subject";
 	}
-
-/*
-	@GetMapping("/class")
-	public String class(@RequestParam(name="class", required=false, defaultValue="World") String name, Model model) {
-		model.addAttribute("class", name);
-		return "class";
-	}
-
-*/
+	
 
 }
