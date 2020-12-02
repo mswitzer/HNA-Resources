@@ -12,6 +12,7 @@ public class MainController {
 	public String subject(@RequestParam(name="subject", required=false, defaultValue="World") String name, Model model) {
 		model.addAttribute("subject", name);
 		return "subject";
+
 	}
 
 
