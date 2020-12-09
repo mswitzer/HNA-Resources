@@ -16,7 +16,7 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 
 @Controller
-public class dataBase{
+public class DataBase {
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
@@ -24,15 +24,16 @@ public class dataBase{
         return "greeting";
     }
 
-public void CallDatabase() {
+    public void CallDatabase() {
 
-        // Connect to database
-        String hostName = "holynamesacademy.database.windows.net";
+        // Connect to DataBase.java
+        String hostName = "holynamesacademy.DataBase.java.windows.net";
         String dbName = "HNAResources";
         String user = "hna-admin";
-        String password = "HolyNames123"
-        String url = String.format("jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;"
-                + "hostNameInCertificate=*.database.windows.net;loginTimeout=30;, hostName, dbName, user, password);
+        String password = "HolyNames123";
+        String url = String.format("jdbc:sqlserver://%s:1433;DataBase.java=%s;user=%s;password=%s;encrypt=true;"
+                + "hostNameInCertificate=*.DataBase.java.windows.net;loginTimeout=30;",hostName, dbName, user, password)
+        ;
         Connection connection = null;
 
         try {
@@ -60,8 +61,7 @@ public void CallDatabase() {
                             + resultSet2.getString(2));
                 }
                 connection.close();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -70,24 +70,24 @@ public void CallDatabase() {
             e.printStackTrace();
         }
     }
-    public static ArrayList<Contact> ClassInfo (){
-        ArrayList<Contact> classes = new ArrayList<Contact>();
-        Contact newClass = new Contact("noName", 0);
 
-        Contact firstAssignment = new Contact("allC", 1);
+    public static ArrayList<Class> ClassInfo() {
+        ArrayList<Class> classes = new ArrayList<Class>();
+        Class newClass = new Class("noName", 0, 0);
+
         try {
-            // create our mysql database connection
+            // create our mysql DataBase.java connection
             //String myDriver = "org.gjt.mm.mysql.Driver";
             //  String myUrl = "jdbc:mysql://localhost/test";
             // Class.forName(myDriver);
             //  Connection conn = DriverManager.getConnection(myUrl, "root", "");
 
-            String hostName = "holynamesacademy.database.windows.net";
+            String hostName = "holynamesacademy.DataBase.java.windows.net";
             String dbName = "HNAResources";
             String user = "hna-admin";
-            String password = "HolyNames123";
-            String url = String.format("jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;"
-                    + "hostNameInCertificate=*.database.windows.net;loginTimeout=30;", hostName, dbName, user, password);
+
+            String url = String.format("jdbc:sqlserver://%s:1433;DataBase.java=%s;user=%s;password=%s;encrypt=true;"
+                    + "hostNameInCertificate=*.DataBase.java.windows.net;loginTimeout=30;", hostName, dbName, user, password);
             Connection connection = null;
 
 
@@ -95,7 +95,7 @@ public void CallDatabase() {
 
             // our SQL SELECT query.
             // if you only need a few columns, specify them by name instead of using "*"
-            String query = "SELECT * FROM Classes where SubjectId=01";
+            String query = "SELECT * FROM Classes";
 
             // create the java statement
             Statement st = connection.createStatement();
@@ -110,18 +110,17 @@ public void CallDatabase() {
                 String name = rs.getString("ClassName");
                 newClass.setName(name);
 
-                classes.add(newClass);
+                Classes.add(newClass);
 
                 // print the results
                 System.out.format("%s, %s, %s\n", newClass.getID(), newClass.getName());
 
                 System.out.print(newClass.getName());
 
-                newClass = new Contact("noName", 0);
+                newClass = new Class("noName", 0);
 
             }
             st.close();
-
 
 
         } catch (Exception e) {
@@ -133,4 +132,5 @@ public void CallDatabase() {
 
 
     }
+}
 
