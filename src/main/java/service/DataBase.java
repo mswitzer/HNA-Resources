@@ -71,9 +71,9 @@ public class DataBase {
         }
     }
 
-    public static ArrayList<Class> ClassInfo() {
-        ArrayList<Class> classes = new ArrayList<Class>();
-        Class newClass = new Class("noName", 0, 0);
+    public static ArrayList<ClassConnector> ClassInfo() {
+        ArrayList<ClassConnector> classes = new ArrayList<ClassConnector>();
+        ClassConnector newClassConnector = new ClassConnector("noName",0, 0);
 
         try {
             // create our mysql DataBase.java connection
@@ -85,7 +85,7 @@ public class DataBase {
             String hostName = "holynamesacademy.DataBase.java.windows.net";
             String dbName = "HNAResources";
             String user = "hna-admin";
-
+            String password = "HolyNames123";
             String url = String.format("jdbc:sqlserver://%s:1433;DataBase.java=%s;user=%s;password=%s;encrypt=true;"
                     + "hostNameInCertificate=*.DataBase.java.windows.net;loginTimeout=30;", hostName, dbName, user, password);
             Connection connection = null;
@@ -106,18 +106,19 @@ public class DataBase {
             // iterate through the java resultset
             while (rs.next()) {
                 int id = rs.getInt("ClassId");
-                newClass.setID(id);
+                newClassConnector.setClassID(id);
                 String name = rs.getString("ClassName");
-                newClass.setName(name);
+                newClassConnector.setClassName(name);
 
-                Classes.add(newClass);
+
+                classes.add(newClassConnector);
 
                 // print the results
-                System.out.format("%s, %s, %s\n", newClass.getID(), newClass.getName());
+                System.out.format("%s, %s, %s\n", newClassConnector.getClassID(), newClassConnector.getClassName());
 
-                System.out.print(newClass.getName());
+                System.out.print(newClassConnector.getClassName());
 
-                newClass = new Class("noName", 0);
+                newClassConnector = new ClassConnector("noName", 0, 0);
 
             }
             st.close();
@@ -128,9 +129,8 @@ public class DataBase {
             System.err.println(e.getMessage());
         }
 
-        return Players;
-
-
+        return classes;
     }
+
 }
 

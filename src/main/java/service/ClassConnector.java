@@ -1,19 +1,20 @@
+package hello;
+import java.util.ArrayList;
 
-
-public class Class{
+public class ClassConnector{
     private int ClassID;
     private String ClassName;
-    private int SubjectID;
     private String SubjectName;
-
-    public Class(String cn, int cID, String sn, int sID){
+    private int SubjectID;
+    
+    public ClassConnector(String cn, int cID, String sn, int sID){
         ClassID = cID;
         ClassName = cn;
         SubjectName = sn;
         SubjectID = sID;
     }
 
-    public Class(String cn, int cID, int sID){
+    public ClassConnector(String cn, int cID, int sID){
         ClassID = cID;
         ClassName = cn;
         SubjectID = sID;
