@@ -85,6 +85,7 @@ public class DataBase {
             String hostName = "holynamesacademy.DataBase.java.windows.net";
             String dbName = "HNAResources";
             String user = "hna-admin";
+            //password here
 
             String url = String.format("jdbc:sqlserver://%s:1433;DataBase.java=%s;user=%s;password=%s;encrypt=true;"
                     + "hostNameInCertificate=*.DataBase.java.windows.net;loginTimeout=30;", hostName, dbName, user, password);
