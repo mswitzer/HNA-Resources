@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Map;
 
 @Controller
 public class DataBase {
@@ -85,6 +86,8 @@ public class DataBase {
             String hostName = "holynamesacademy.DataBase.java.windows.net";
             String dbName = "HNAResources";
             String user = "hna-admin";
+            Map<String, String> env = System.getenv();
+            String password = env.get("password");
             //password here
 
             String url = String.format("jdbc:sqlserver://%s:1433;DataBase.java=%s;user=%s;password=%s;encrypt=true;"
