@@ -15,6 +15,10 @@ public class MainController {
 		return "subject";
 	}
 
+
+
+
+
 	@GetMapping("/subject/{category}")
 	public String category(@PathVariable("category") String category, Model model){
 		model.addAttribute("category", category);

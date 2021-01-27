@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text = "${subject}"/>
 </head>
 <body>
+    <h1 th:text = "${subject}" />
 <ul>
     <li> <a href = "class?class= Class 1"> Class 1 </a> </li>
+    <li> <a href = "class?class= Class 1"> Class 2 </a> </li>
+    <li> <a href = "class?class= Class 1"> Class 3 </a> </li>
+    <li> <a href = "class?class= Class 1"> Class 4 </a> </li>
+    <li> <a href = "class?class= Class 1"> Class 5 </a> </li>
 </ul>
 </body>
-
-</html>
