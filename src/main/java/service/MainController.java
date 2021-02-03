@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class MainController {
 
 	@GetMapping("/subject")
-	public String subject(@RequestParam(name="subject", required=false, defaultValue="World") String name, Model model) {
+	public String subject(@RequestParam(name="subject", required=false, defaultValue="World") String name, Model model,
+	@RequestParam(name="subjectId", required=false, defaultValue="World") int subjectId) {
 		model.addAttribute("subject", name);
+		model.addAttribute("subjectId", subjectId);
+		//database.ClassInfo()
 		return "subject";
 	}
 

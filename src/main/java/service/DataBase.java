@@ -99,7 +99,7 @@ public class DataBase {
 
             // our SQL SELECT query.
             // if you only need a few columns, specify them by name instead of using "*"
-            String query = "SELECT * FROM Classes";//"where subject = "
+            String query = "SELECT * FROM Classes WHERE SubjectId = 1";//"where subject = "
 
             // create the java statement
             Statement st = connection.createStatement();
