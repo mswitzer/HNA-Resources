@@ -16,14 +16,16 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Map;
 
-@Controller
+//@Controller
 public class DataBase {
 
-    @GetMapping("/greeting")
+   /* @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
         return "greeting";
     }
+
+    */
 
     public void CallDatabase() {
 
@@ -99,7 +101,7 @@ public class DataBase {
 
             // our SQL SELECT query.
             // if you only need a few columns, specify them by name instead of using "*"
-            String query = "SELECT * FROM Classes WHERE SubjectId = 1";//"where subject = "
+            String query = "SELECT * FROM Classes WHERE";//"where SubjectId = "
 
             // create the java statement
             Statement st = connection.createStatement();
