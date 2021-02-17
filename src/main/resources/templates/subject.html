@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +10,10 @@
     <div class = "header"> <h1 th:text = "${subject}" /> </div>
 
 
-
-
-<ul
+    <ul
    th:each = "class : ${classList}">
-    <li th:text = "${class}"> </li>
+    <li th:text = "${class.getClassName()}"> </li>
 
 </ul>
+
 </body>

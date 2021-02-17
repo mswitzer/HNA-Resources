@@ -17,8 +17,8 @@ public class MainController {
 	DataBase databaseClasses = new DataBase();
 
 	@GetMapping("/subject")
-	public String subject(@RequestParam(name="subject", required=false, defaultValue="World") String name, Model model,
-	@RequestParam(name="subjectId", required=false, defaultValue="World") int subjectId) {
+	public String subject(@RequestParam(name="subject", required=true) String name, Model model,
+	@RequestParam(name="subjectId", required=true) int subjectId) {
 		ArrayList<ClassConnector> classList = databaseClasses.ClassInfo();
 		model.addAttribute("subject", name);
 		model.addAttribute("subjectId", subjectId);
