@@ -120,7 +120,7 @@ public class DataBase {
                 classes.add(newClassConnector);
 
                 // print the results
-                System.out.format("%s, %s, %s\n", newClassConnector.getClassID(), newClassConnector.getClassName());
+                System.out.format("%d, %s\n", newClassConnector.getClassID(), newClassConnector.getClassName());
 
                 System.out.print(newClassConnector.getClassName());
 
