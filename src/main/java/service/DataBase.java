@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Map;
+import java.net.URL;
+import java.lang.Integer;
 
 //@Controller
 public class DataBase {
@@ -74,9 +76,9 @@ public class DataBase {
         }
     }
 
-    public static ArrayList<ClassConnector> ClassInfo() {
+    public static ArrayList<ClassConnector> ClassInfo(int subjectId) {
         ArrayList<ClassConnector> classes = new ArrayList<ClassConnector>();
-        ClassConnector newClassConnector = new ClassConnector("noName",0, 0);
+        ClassConnector newClassConnector = new ClassConnector("noName", 0, subjectId);
 
         try {
             // create our mysql DataBase.java connection
@@ -101,7 +103,9 @@ public class DataBase {
 
             // our SQL SELECT query.
             // if you only need a few columns, specify them by name instead of using "*"
-            String query = "select * from [HNAResources].[dbo].[Classes]";//"where SubjectId = "
+            //get subjectId from maincontroller, pluge it into SubjectId + change to int
+
+            String query = "select * from [HNAResources].[dbo].[Classes] where SubjectId = " + subjectId; //where SubjectId = ???"
 
             // create the java statement
             Statement st = connection.createStatement();

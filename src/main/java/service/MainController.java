@@ -19,9 +19,9 @@ public class MainController {
 	@GetMapping("/subject")
 	public String subject(@RequestParam(name="subject", required=true) String name, Model model,
 	@RequestParam(name="subjectId", required=true) int subjectId) {
-		ArrayList<ClassConnector> classList = databaseClasses.ClassInfo();
-		model.addAttribute("subject", name);
-		model.addAttribute("subjectId", subjectId);
+			ArrayList<ClassConnector> classList = databaseClasses.ClassInfo(subjectId);
+			model.addAttribute("subject", name);
+			model.addAttribute("subjectId", subjectId);
 		model.addAttribute("classList", classList);
 		return "subject";
 	}
