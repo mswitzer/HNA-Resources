@@ -142,5 +142,71 @@ public class DataBase {
         return classes;
     }
 
+    public static ArrayList<ClassConnector> LinkInfo(int classId) {
+        ArrayList<ClassConnector> classes = new ArrayList<ClassConnector>();
+        ClassConnector newClassConnector = new ClassConnector(classId,"noName", 0);
+
+        try {
+            // create our mysql DataBase.java connection
+            //String myDriver = "org.gjt.mm.mysql.Driver";
+            //  String myUrl = "jdbc:mysql://localhost/test";
+            // Class.forName(myDriver);
+            //  Connection conn = DriverManager.getConnection(myUrl, "root", "");
+
+            String hostName = "holynamesacademy.database.windows.net";
+            String dbName = "HNAResources";
+            String user = "hna-admin";
+            Map<String, String> env = System.getenv();
+            String password = env.get("password");
+            //password here
+
+            String url = String.format("jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;trustServerCertificate=true;"
+                    + "hostNameInCertificate=*.DataBase.java.windows.net;loginTimeout=30;", hostName, dbName, user, password);
+            Connection connection = null;
+
+
+            connection = DriverManager.getConnection(url);
+
+            // our SQL SELECT query.
+            // if you only need a few columns, specify them by name instead of using "*"
+            //get subjectId from maincontroller, pluge it into SubjectId + change to int
+
+            String query = "SELECT LinkId, Link FROM ClassLinks WHERE ClassId = " + classId; //where SubjectId = ???"
+
+            // create the java statement
+            Statement st = connection.createStatement();
+
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query);
+
+            // iterate through the java resultset
+            while (rs.next()) {
+                int id = rs.getInt("LinkId");
+                newClassConnector.setLinkID(id);
+                String name = rs.getString("Link");
+                newClassConnector.setLinkName(name);
+
+
+                classes.add(newClassConnector);
+
+                // print the results
+                System.out.format("%d, %s\n", newClassConnector.getLinkID(), newClassConnector.getLinkName());
+
+                System.out.print(newClassConnector.getLinkName());
+
+                newClassConnector = new ClassConnector(0, "noName", 0);
+
+            }
+            st.close();
+
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+
+        return classes;
+    }
+
 }
 

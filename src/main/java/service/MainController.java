@@ -22,19 +22,19 @@ public class MainController {
 			ArrayList<ClassConnector> classList = databaseClasses.ClassInfo(subjectId);
 			model.addAttribute("subject", name);
 			model.addAttribute("subjectId", subjectId);
-		model.addAttribute("classList", classList);
+			model.addAttribute("classList", classList);
 		return "subject";
 	}
 
 
 
 
-
-	@GetMapping("/subject/{category}")
-	public String category(@PathVariable("category") String category, Model model){
-		model.addAttribute("category", category);
-		return "subject";
-
+@GetMapping("/class/{classId}")
+	public String classPage(@PathVariable("classId") int classId, Model model) {
+		ArrayList<ClassConnector> linkList = databaseClasses.LinkInfo(classId);
+		model.addAttribute("classId", classId);
+		model.addAttribute("linkList", linkList);
+		return "classPage";
 	}
 
 
