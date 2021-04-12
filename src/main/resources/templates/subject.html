@@ -14,8 +14,9 @@
 
     <ul
         th:each = "class : ${classList}">
-        <li> <a th:href = "@{/class/{classId}(classId=${class.getClassID()})}"th:text = "${class.getClassName()}"></a> </li>
-<!--        (classId=class.getClassID())}-->
+            <div class = "button">
+                <li> <a th:href = "@{/class/{classId}(classId=${class.getClassID()})}"th:text = "${class.getClassName()}"></a> </li>
+            </div>
 
 </ul>
 
