@@ -15,15 +15,19 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Map;
+import java.net.URL;
+import java.lang.Integer;
 
-@Controller
+//@Controller
 public class DataBase {
 
-    @GetMapping("/greeting")
+   /* @GetMapping("/greeting")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
         return "greeting";
     }
+
+    */
 
     public void CallDatabase() {
 
@@ -72,9 +76,9 @@ public class DataBase {
         }
     }
 
-    public static ArrayList<ClassConnector> ClassInfo() {
+    public static ArrayList<ClassConnector> ClassInfo(int subjectId) {
         ArrayList<ClassConnector> classes = new ArrayList<ClassConnector>();
-        ClassConnector newClassConnector = new ClassConnector("noName",0, 0);
+        ClassConnector newClassConnector = new ClassConnector("noName", 0, subjectId);
 
         try {
             // create our mysql DataBase.java connection
@@ -83,14 +87,14 @@ public class DataBase {
             // Class.forName(myDriver);
             //  Connection conn = DriverManager.getConnection(myUrl, "root", "");
 
-            String hostName = "holynamesacademy.DataBase.java.windows.net";
+            String hostName = "holynamesacademy.database.windows.net";
             String dbName = "HNAResources";
             String user = "hna-admin";
             Map<String, String> env = System.getenv();
             String password = env.get("password");
             //password here
 
-            String url = String.format("jdbc:sqlserver://%s:1433;DataBase.java=%s;user=%s;password=%s;encrypt=true;"
+            String url = String.format("jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;trustServerCertificate=true;"
                     + "hostNameInCertificate=*.DataBase.java.windows.net;loginTimeout=30;", hostName, dbName, user, password);
             Connection connection = null;
 
@@ -99,7 +103,9 @@ public class DataBase {
 
             // our SQL SELECT query.
             // if you only need a few columns, specify them by name instead of using "*"
-            String query = "SELECT * FROM Classes";
+            //get subjectId from maincontroller, pluge it into SubjectId + change to int
+
+            String query = "select * from [HNAResources].[dbo].[Classes] where SubjectId = " + subjectId; //where SubjectId = ???"
 
             // create the java statement
             Statement st = connection.createStatement();
@@ -118,11 +124,77 @@ public class DataBase {
                 classes.add(newClassConnector);
 
                 // print the results
-                System.out.format("%s, %s, %s\n", newClassConnector.getClassID(), newClassConnector.getClassName());
+                System.out.format("%d, %s\n", newClassConnector.getClassID(), newClassConnector.getClassName());
 
                 System.out.print(newClassConnector.getClassName());
 
                 newClassConnector = new ClassConnector("noName", 0, 0);
+
+            }
+            st.close();
+
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+
+        return classes;
+    }
+
+    public static ArrayList<ClassConnector> LinkInfo(int classId) {
+        ArrayList<ClassConnector> classes = new ArrayList<ClassConnector>();
+        ClassConnector newClassConnector = new ClassConnector(classId,"noName", 0);
+
+        try {
+            // create our mysql DataBase.java connection
+            //String myDriver = "org.gjt.mm.mysql.Driver";
+            //  String myUrl = "jdbc:mysql://localhost/test";
+            // Class.forName(myDriver);
+            //  Connection conn = DriverManager.getConnection(myUrl, "root", "");
+
+            String hostName = "holynamesacademy.database.windows.net";
+            String dbName = "HNAResources";
+            String user = "hna-admin";
+            Map<String, String> env = System.getenv();
+            String password = env.get("password");
+            //password here
+
+            String url = String.format("jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;trustServerCertificate=true;"
+                    + "hostNameInCertificate=*.DataBase.java.windows.net;loginTimeout=30;", hostName, dbName, user, password);
+            Connection connection = null;
+
+
+            connection = DriverManager.getConnection(url);
+
+            // our SQL SELECT query.
+            // if you only need a few columns, specify them by name instead of using "*"
+            //get subjectId from maincontroller, pluge it into SubjectId + change to int
+
+            String query = "SELECT LinkId, Link FROM ClassLinks WHERE ClassId = " + classId; //where SubjectId = ???"
+
+            // create the java statement
+            Statement st = connection.createStatement();
+
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query);
+
+            // iterate through the java resultset
+            while (rs.next()) {
+                int id = rs.getInt("LinkId");
+                newClassConnector.setLinkID(id);
+                String name = rs.getString("Link");
+                newClassConnector.setLinkName(name);
+
+
+                classes.add(newClassConnector);
+
+                // print the results
+                System.out.format("%d, %s\n", newClassConnector.getLinkID(), newClassConnector.getLinkName());
+
+                System.out.print(newClassConnector.getLinkName());
+
+                newClassConnector = new ClassConnector(0, "noName", 0);
 
             }
             st.close();

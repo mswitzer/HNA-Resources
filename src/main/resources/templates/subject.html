@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text = "${subject}"/>
+    <link th:href = "@{/style.css}" rel = "stylesheet" />
 </head>
 <body>
-<ul>
-    <li> <a href = "class?class= Class 1"> Class 1 </a> </li>
-</ul>
-</body>
+    <div class = "header">
+        <h1 th:text = "${subject}" />
+    </div>
 
-</html>
+
+    <ul
+        th:each = "class : ${classList}">
+            <div class = "button">
+                <li> <a th:href = "@{/class/{classId}(classId=${class.getClassID()})}"th:text = "${class.getClassName()}"></a> </li>
+            </div>
+
+</ul>
+
+</body>

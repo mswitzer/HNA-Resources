@@ -1,0 +1,19 @@
+<<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:href = "@{/style.css}" rel = "stylesheet" />
+
+</head>
+<body>
+
+<div class = "header">
+    <h1>Here are some study guides and flashcards to help you study!</h1>
+</div>
+<ul
+    th:each = "link : ${linkList}">
+    <li> <a th:text = "${link.getLinkName()}" ></a> </li>
+</ul>
+</body>
+</html>
